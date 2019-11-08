@@ -166,7 +166,8 @@
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-&lt;/div&gt;</value>
+&lt;/div&gt;
+</value>
   </data>
   <data name="AssertEqualHelloWorld" xml:space="preserve">
     <value>&lt;!DOCTYPE html&gt;
@@ -211,7 +212,7 @@
   </data>
   <data name="AssertSkipComments" xml:space="preserve">
     <value>&lt;div class="component"&gt;
-    &lt;a href="http://www.google.com" /&gt;
+    &lt;a href="http://www.google.com"&gt;&lt;/a&gt;
 &lt;/div&gt;
 </value>
   </data>

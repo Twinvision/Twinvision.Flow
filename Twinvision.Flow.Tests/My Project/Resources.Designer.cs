@@ -151,7 +151,7 @@ namespace Test {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;div class=&quot;component&quot;&gt;
-        ///    &lt;a href=&quot;http://www.google.com&quot; /&gt;
+        ///    &lt;a href=&quot;http://www.google.com&quot;&gt;&lt;/a&gt;
         ///&lt;/div&gt;
         ///.
         /// </summary>

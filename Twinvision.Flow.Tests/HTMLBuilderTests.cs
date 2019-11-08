@@ -88,7 +88,7 @@ namespace Twinvision.Flow.Tests
         [TestCategory("Standards")]
         public void InvalidTagForHTML5()
         {
-            var builder = new HTMLBuilder();
+            var builder = new HTMLBuilder(HTMLDocumentType.HTML5);
             bool exceptionThrown = false;
             try
             {
