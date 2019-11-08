@@ -23,7 +23,7 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
             builder.Document().Body(content: "Size 8");
             builder.Settings.TabSize = 8;
-            Assert.AreEqual(My.Resources.Resources.AssertEqualTabSize8, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertEqualTabSize8, builder.ToString());
         }
 
         [TestMethod()]
@@ -33,7 +33,7 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
             builder.Settings.WriteComments = false;
             builder.BeginComponent().Div("component").Child().A("http://www.google.com").EndComponent();
-            Assert.AreEqual(My.Resources.Resources.AssertSkipComments, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertSkipComments, builder.ToString());
         }
 
         [TestMethod()]
@@ -42,7 +42,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.Document().Body(content: "Hello world!");
-            Assert.AreEqual(My.Resources.Resources.AssertEqualHelloWorld, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertEqualHelloWorld, builder.ToString());
         }
 
         [TestMethod()]
@@ -52,7 +52,7 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
             builder.AddElement("DiV", new[] { new HTMLAttribute("CLASS", "Test") }, "Content");
             builder.Settings.EnforceProperCase = false;
-            Assert.AreEqual(My.Resources.Resources.AssertEqualPreserveCase, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertEqualPreserveCase, builder.ToString());
         }
 
         [TestMethod()]
@@ -63,7 +63,7 @@ namespace Twinvision.Flow.Tests
 
             for (int i = 1; i <= 25; i++)
                 builder.Child().Div(className: "class" + i.ToString(), id: "element" + i.ToString());
-            Assert.AreEqual(My.Resources.Resources.AssertEqualDeeplyNested, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertEqualDeeplyNested, builder.ToString());
         }
 
         [TestMethod()]
@@ -72,7 +72,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.Document("en").Body().Comment("A comment for a div element").Div(content: "HTML comments test");
-            Assert.AreEqual(My.Resources.Resources.AssertEqualSingleLineComment, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertEqualSingleLineComment, builder.ToString());
         }
 
         [TestMethod()]
@@ -81,7 +81,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.Document("en").Body().Comment("A comment for" + Constants.vbCrLf + "a div element").Div(content: "HTML comments test");
-            Assert.AreEqual(My.Resources.Resources.AssertEqualMultiLineComment, builder.ToString());
+            Assert.AreEqual(Test.Resources.AssertEqualMultiLineComment, builder.ToString());
         }
 
         [TestMethod()]

@@ -501,129 +501,129 @@ namespace Twinvision.Flow
             },
             {
                 "body",
-              new string []   {
+                new string [] {
                     "html:1"
                 }
             },
             {
                 "head",
-          new string []       {
+                new string [] {
                     "html:1"
                 }
             },
             {
                 "title",
-           new string []      {
+                new string [] {
                     "head:1"
                 }
             },
             {
                 "link",
-         new string []        {
+                new string [] {
                     "head:*"
                 }
             },
             {
                 "meta",
-      new string []           {
+                new string [] {
                     "head:*"
                 }
             },
             {
                 "tr",
-        new string []         {
+                new string [] {
                     "table:*"
                 }
             },
             {
                 "td",
-     new string []            {
+                new string [] {
                     "tr:*"
                 }
             },
             {
                 "th",
-    new string []             {
+                new string [] {
                     "tr:*"
                 }
             },
             {
                 "caption",
-      new string []           {
+                new string [] {
                     "table:1"
                 }
             },
             {
                 "tfoot",
-     new string []            {
+                new string [] {
                     "table:1"
                 }
             },
             {
                 "tbody",
- new string []                {
+                new string [] {
                     "table:1"
                 }
             },
             {
                 "thead",
-  new string []               {
+                new string [] {
                     "table:1"
                 }
             },
             {
                 "colgroup",
-    new string []             {
+                new string [] {
                     "table:*"
                 }
             },
             {
                 "col",
-  new string []               {
+                new string [] {
                     "colgroup:*"
                 }
             },
             {
                 "dt",
-     new string []            {
+                new string [] {
                     "dl:*"
                 }
             },
             {
                 "dd",
-     new string []            {
+                new string [] {
                     "dt:*"
                 }
             },
             {
                 "source",
-    new string []             {
+                new string [] {
                     "audio:*",
                     "video:*"
                 }
             },
             {
                 "track",
- new string []                {
+                new string [] {
                     "audio:*",
                     "video:*"
                 }
             },
             {
                 "frame",
-    new string []             {
+                new string [] {
                     "frameset:*"
                 }
             },
             {
                 "noframes",
-      new string []           {
+                new string [] {
                     "frameset:1"
                 }
             },
             {
                 "option",
-       new string []          {
+                new string [] {
                     "select:*",
                     "datalist:*",
                     "optgroup:*"
@@ -631,31 +631,31 @@ namespace Twinvision.Flow
             },
             {
                 "optgroup",
-     new string []            {
+                new string [] {
                     "select:*"
                 }
             },
             {
                 "summary",
-    new string []             {
+                new string [] {
                     "details:1"
                 }
             },
             {
                 "legend",
-   new string []              {
+                new string [] {
                     "fieldset:1"
                 }
             },
             {
                 "figcaption",
-    new string []             {
+                new string [] {
                     "figure:1"
                 }
             },
             {
                 "area",
-   new string []              {
+                new string [] {
                     "map:*"
                 }
             }

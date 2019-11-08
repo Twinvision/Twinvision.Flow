@@ -154,7 +154,7 @@ namespace Twinvision.Flow
     /// </summary>
         public static IEnumerable<HTMLElementNode> Descendants<T>(this HTMLElementNode adapter)
         {
-            return adapter.Descendants().Where(i => i.Item is T);
+            return adapter.Descendants().Where(i => i is T);
         }
     }
 }
