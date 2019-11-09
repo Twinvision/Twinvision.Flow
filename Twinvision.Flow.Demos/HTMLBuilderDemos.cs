@@ -2,7 +2,7 @@
 
 namespace Twinvision.Flow.Demos
 {
-    static class HTMLBuilderDemos
+    internal static class HTMLBuilderDemos
     {
         public static void Main()
         {

@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace Twinvision.Flow
 {
@@ -20,7 +20,7 @@ namespace Twinvision.Flow
         string Open(bool enforceProperCase = true);
         string Close(bool enforceProperCase = true);
         string Empty(bool enforceProperCase = true);
-        List<HTMLAttribute> Attributes { get; set; }
+        List<HTMLAttribute> Attributes { get; }
         string Content { get; set; }
         bool IsMultiLine { get; }
         ContentPosition ContentPosition { get; set; }
@@ -35,6 +35,7 @@ namespace Twinvision.Flow
         AfterAlements = 1
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Makes it more readable")]
     public enum HTMLDocumentType : int
     {
         XHTML_1_1 = 0,
@@ -77,37 +78,34 @@ namespace Twinvision.Flow
     }
 
     /// <summary>
-
     /// This class represents a tree of IHTMLElement
-
     /// </summary>
-
     /// <remarks>Used together with the Interface IHTMLElement to construct an HTML document tree</remarks>
     public class HTMLElementNode
     {
         public IHTMLElement Element { get; set; }
         public HTMLElementNode Parent { get; set; }
-        private List<HTMLElementNode> _childNodes;
+        private readonly List<HTMLElementNode> _childNodes;
 
         public HTMLElementNode(HTMLElementNode parent, IHTMLElement nodeData)
         {
             Element = nodeData;
             if (parent == null)
+            {
                 Parent = this;
+            }
             else
+            {
                 Parent = parent;
+            }
+
             _childNodes = new List<HTMLElementNode>();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Alternative is a function but that breaks existing code")]
         public HTMLElementNode[] Children => _childNodes.ToArray();
 
-        public HTMLElementNode this[long index]
-        {
-            get
-            {
-                return _childNodes[Conversions.ToInteger(index)];
-            }
-        }
+        public HTMLElementNode this[long index] => _childNodes[Conversions.ToInteger(index)];
 
         protected internal HTMLElementNode AddChild(IHTMLElement nodeData)
         {
@@ -139,20 +137,11 @@ namespace Twinvision.Flow
         }
     }
 
-    public class HTMLTag
-    {
-        public string Name { get; set; }
-        public bool[] DocType { get; set; }
-    }
 
     /// <summary>
-
     /// This class represents an HTML attribute.
-
     /// These are the key value pairs you can find inside an opening tag of an HTML element
-
     /// </summary>
-
     /// <remarks></remarks>
     public class HTMLAttribute
     {
@@ -161,26 +150,14 @@ namespace Twinvision.Flow
 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get => _name;
+            set => _name = value;
         }
 
         public string Value
         {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
+            get => _value;
+            set => _value = value;
         }
 
         public HTMLAttribute(string name, string value)
@@ -198,22 +175,33 @@ namespace Twinvision.Flow
         public override string ToString()
         {
             if (Value == null)
+            {
                 return Name;
+            }
             else
+            {
                 return Name + "=\"" + Value + "\"";
+            }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "Lower case is the proper casing for html attributes")]
         public string ToString(bool enforceProperCase)
         {
             if (enforceProperCase)
             {
                 if (Value == null)
+                {
                     return Name.ToLowerInvariant();
+                }
                 else
+                {
                     return Name.ToLowerInvariant() + "=\"" + Value + "\"";
+                }
             }
             else
+            {
                 return ToString();
+            }
         }
     }
 
@@ -230,13 +218,10 @@ namespace Twinvision.Flow
 
         public string Content
         {
-            get
-            {
-                return _content;
-            }
+            get => _content;
             set
             {
-                _content = value;
+                _content = value ?? "";
                 IsMultiLine = _content.Contains(System.Environment.NewLine);
             }
         }
@@ -244,17 +229,25 @@ namespace Twinvision.Flow
         public string Open(bool enforceProperCase = true)
         {
             if (IsMultiLine)
+            {
                 return "<!--";
+            }
             else
+            {
                 return "<!-- ";
+            }
         }
 
         public string Close(bool enforceProperCase = true)
         {
             if (IsMultiLine)
+            {
                 return "-->";
+            }
             else
+            {
                 return " -->";
+            }
         }
 
         public bool IsMultiLine { get; private set; }
@@ -267,12 +260,16 @@ namespace Twinvision.Flow
         public string ToString(bool enforceProperCase = true)
         {
             if (IsMultiLine)
+            {
                 return Open(enforceProperCase) + System.Environment.NewLine + Content + System.Environment.NewLine + Close(enforceProperCase);
+            }
             else
+            {
                 return Open(enforceProperCase) + " " + Content + " " + Close(enforceProperCase);
+            }
         }
 
-        public List<HTMLAttribute> Attributes { get; set; }
+        public List<HTMLAttribute> Attributes { get; }
 
         public string Empty(bool enforceProperCase = true)
         {
@@ -298,10 +295,7 @@ namespace Twinvision.Flow
     {
         public string Content
         {
-            get
-            {
-                return "";
-            }
+            get => "";
             set
             {
             }
@@ -317,23 +311,21 @@ namespace Twinvision.Flow
             return "";
         }
 
-        public bool IsMultiLine
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsMultiLine => false;
 
         public string ToString(bool enforceProperCase = true)
         {
             if (IsMultiLine)
+            {
                 return Open(enforceProperCase) + System.Environment.NewLine + Content + System.Environment.NewLine + Close(enforceProperCase);
+            }
             else
+            {
                 return Open(enforceProperCase) + " " + Content + " " + Close(enforceProperCase);
+            }
         }
 
-        public List<HTMLAttribute> Attributes { get; set; }
+        public List<HTMLAttribute> Attributes { get; }
 
         public string Empty(bool enforceProperCase = true)
         {
@@ -425,34 +417,52 @@ namespace Twinvision.Flow
 
         public virtual string Content
         {
-            get
-            {
-                return _content;
-            }
+            get => _content;
             set
             {
-                _content = value;
+                _content = value ?? "";
                 _isMultiLine = _content.Contains(System.Environment.NewLine);
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "Tags are in lowercase when properly cased")]
         public string Tag(bool enforceProperCase = true)
         {
             if (enforceProperCase)
+            {
                 return _tag.ToLowerInvariant();
+            }
             else
+            {
                 return _tag;
+            }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "Tags are in lowercase when properly cased")]
         public void Tag(string value, bool enforceProperCase = true)
         {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
             if (Regex.IsMatch(value, "^[A-Za-z0-9]*$"))
-                _tag = value;
+            {
+                if (enforceProperCase)
+                {
+                    _tag = value.ToLowerInvariant();
+                }
+                else
+                {
+                    _tag = value;
+                }
+            }
             else
-                throw new Exception(string.Format("Tag <{0}> contains invalid characters", value));
+            {
+                throw new Exception($"Tag <{value}> contains invalid characters");
+            }
         }
 
-        public List<HTMLAttribute> Attributes { get; set; } = new List<HTMLAttribute>();
+        public List<HTMLAttribute> Attributes { get; } = new List<HTMLAttribute>();
 
         public HTMLElement(string tag)
         {
@@ -469,7 +479,9 @@ namespace Twinvision.Flow
         {
             Tag(tag);
             if (attributes != null)
+            {
                 Attributes.AddRange(attributes);
+            }
         }
 
         public HTMLElement(string tag, IEnumerable<HTMLAttribute> attributes, string content)
@@ -477,7 +489,9 @@ namespace Twinvision.Flow
             Tag(tag);
             Content = content;
             if (attributes != null)
+            {
                 Attributes.AddRange(attributes);
+            }
         }
 
         public HTMLElement(string tag, string content, IEnumerable<HTMLAttribute> attributes)
@@ -485,7 +499,9 @@ namespace Twinvision.Flow
             Tag(tag);
             Content = content;
             if (attributes != null)
+            {
                 Attributes.AddRange(attributes);
+            }
         }
 
         public HTMLElement(string tag, string content, IEnumerable<HTMLAttribute> attributes, ContentPosition contentPosition)
@@ -493,20 +509,28 @@ namespace Twinvision.Flow
             Tag(tag);
             Content = content;
             if (attributes != null)
+            {
                 Attributes.AddRange(attributes);
+            }
+
             ContentPosition = contentPosition;
         }
 
         public virtual string Open(bool enforceProperCase)
         {
             if (Attributes.Count == 0)
+            {
                 return "<" + Tag(enforceProperCase) + ">";
+            }
             else
             {
                 string result = "";
                 result = "<" + Tag(enforceProperCase);
                 foreach (var attribute in Attributes)
+                {
                     result += " " + attribute.ToString(enforceProperCase);
+                }
+
                 result += ">";
                 return result;
             }
@@ -520,12 +544,17 @@ namespace Twinvision.Flow
         public string Empty(bool enforceProperCase = true)
         {
             if (Attributes.Count == 0)
+            {
                 return "<" + Tag(enforceProperCase) + "/>";
+            }
             else
             {
                 string result = "<" + Tag(enforceProperCase);
                 foreach (var attribute in Attributes)
+                {
                     result += " " + attribute.ToString(enforceProperCase);
+                }
+
                 result += " />";
                 return result;
             }
@@ -534,19 +563,17 @@ namespace Twinvision.Flow
         public string ToString(bool enforceProperCase = true)
         {
             if (string.IsNullOrWhiteSpace(Content) && HTMLTags.SelfClosing.Contains(Tag(enforceProperCase).ToLowerInvariant()))
-                return Empty(enforceProperCase);
-            else
-                return Open(enforceProperCase) + Content + Close(enforceProperCase);
-        }
-
-
-        public bool IsMultiLine
-        {
-            get
             {
-                return _isMultiLine;
+                return Empty(enforceProperCase);
+            }
+            else
+            {
+                return Open(enforceProperCase) + Content + Close(enforceProperCase);
             }
         }
+
+
+        public bool IsMultiLine => _isMultiLine;
 
         public ContentPosition ContentPosition { get; set; } = ContentPosition.BeforeElements;
     }
@@ -585,13 +612,9 @@ namespace Twinvision.Flow
     }
 
     /// <summary>
-
     /// This class alows you to add elements using many helper functions (i.e. Document Body, Header and Div)
-
     /// and create some hopefully well-formed HTML output
-
     /// </summary>
-
     /// <remarks></remarks>
     public class HTMLBuilder
     {
@@ -602,17 +625,21 @@ namespace Twinvision.Flow
         private bool _addChildNode = false;
         private bool _addNextNode = true;
 
-        public HTMLBuilderSettings Settings = new HTMLBuilderSettings();
+        public HTMLBuilderSettings Settings { get; set; } = new HTMLBuilderSettings();
         public static HTMLBuilderSettings DefaultSettings { get; set; } = new HTMLBuilderSettings();
 
         public HTMLDocumentType DocumentType { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations", Justification = "Changing this property to a function would break existing code")]
         public HTMLElementNode DOM
         {
             get
             {
                 if (tree == null)
+                {
                     throw new Exception("Add an element first before accessing the DOM.");
+                }
+
                 return tree;
             }
         }
@@ -642,7 +669,7 @@ namespace Twinvision.Flow
 
         private void WriteTree(StringBuilder sb, HTMLElementNode root, int nestedLevel = 0)
         {
-            if (!(root == null))
+            if (root != null)
             {
                 string content = "";
                 var elementType = root.Element.GetType();
@@ -650,15 +677,22 @@ namespace Twinvision.Flow
                 if (elementType == typeof(HTMLEmpty) || !Settings.WriteComments & elementType == typeof(HTMLComment))
                 {
                     foreach (HTMLElementNode child in root.Children)
+                    {
                         WriteTree(sb, child, nestedLevel);
+                    }
                 }
                 else if (root.Children.Length == 0 && string.IsNullOrEmpty(root.Element.Content) && HTMLTags.SelfClosing.Contains(root.Element.Tag().ToLowerInvariant()))
+                {
                     sb.AppendLine(new string(' ', nestedLevel * Settings.TabSize) + root.Element.Empty(Settings.EnforceProperCase));
+                }
                 else
                 {
                     sb.Append(new string(' ', nestedLevel * Settings.TabSize) + root.Element.Open(Settings.EnforceProperCase));
                     if (root.Children.Length > 0 | root.Element.IsMultiLine)
+                    {
                         sb.AppendLine();
+                    }
+
                     if (!string.IsNullOrEmpty(root.Element.Content))
                     {
                         if (root.Children.Length > 0 | root.Element.IsMultiLine)
@@ -666,28 +700,47 @@ namespace Twinvision.Flow
                             using (var sr = new System.IO.StringReader(root.Element.Content))
                             {
                                 while (sr.Peek() != -1)
+                                {
                                     content += new string(' ', (nestedLevel + 1) * Settings.TabSize) + sr.ReadLine() + Environment.NewLine;
+                                }
                             }
                         }
                         else
+                        {
                             content += root.Element.Content;
+                        }
+
                         if (root.Element.ContentPosition == (int)ContentPosition.BeforeElements)
+                        {
                             sb.Append(content);
+                        }
                     }
                     foreach (HTMLElementNode child in root.Children)
                     {
                         if (Settings.IndentHeaderAndBodyTags || !Settings.IndentHeaderAndBodyTags && !((root.Element.Tag(true) ?? "") == "html"))
+                        {
                             nestedLevel += 1;
+                        }
+
                         WriteTree(sb, child, nestedLevel);
                         if (Settings.IndentHeaderAndBodyTags || !Settings.IndentHeaderAndBodyTags && !((root.Element.Tag(true) ?? "") == "html"))
+                        {
                             nestedLevel -= 1;
+                        }
                     }
                     if ((int)root.Element.ContentPosition == (int)ContentPosition.AfterAlements && !string.IsNullOrEmpty(content))
+                    {
                         sb.Append(content);
+                    }
+
                     if (root.Children.Length == 0 && !root.Element.IsMultiLine)
+                    {
                         sb.AppendLine(root.Element.Close(Settings.EnforceProperCase));
+                    }
                     else
+                    {
                         sb.AppendLine(new string(' ', nestedLevel * Settings.TabSize) + root.Element.Close(Settings.EnforceProperCase));
+                    }
                 }
             }
         }
@@ -701,7 +754,10 @@ namespace Twinvision.Flow
         public HTMLBuilder Child()
         {
             if (lastNode != null && lastNode.Element is HTMLComment)
+            {
                 throw new Exception("HTML comments cannot have child elements");
+            }
+
             AddChildNode = true;
             return this;
         }
@@ -716,12 +772,11 @@ namespace Twinvision.Flow
                     return true;
                 }
                 else
+                {
                     return false;
+                }
             }
-            set
-            {
-                _addChildNode = value;
-            }
+            set => _addChildNode = value;
         }
 
         private bool AddNextNode
@@ -734,16 +789,19 @@ namespace Twinvision.Flow
                     return false;
                 }
                 else
+                {
                     return true;
+                }
             }
-            set
-            {
-                _addNextNode = value;
-            }
+            set => _addNextNode = value;
         }
 
         public HTMLBuilder AddElement(IHTMLElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
             return AddElement(-1, element.Tag(), element.Attributes.ToArray(), element.Content, AddChildNode, ContentPosition.BeforeElements);
         }
 
@@ -774,6 +832,10 @@ namespace Twinvision.Flow
 
         public HTMLBuilder InsertElement(int index, IHTMLElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
             return AddElement(index, element.Tag(), element.Attributes.ToArray(), element.Content, AddChildNode, ContentPosition.BeforeElements);
         }
 
@@ -799,12 +861,19 @@ namespace Twinvision.Flow
 
         private HTMLBuilder AddElement(int index, string tag, IEnumerable<HTMLAttribute> attributes, string content, bool asChild, ContentPosition contentPosition)
         {
+            if (string.IsNullOrWhiteSpace(tag))
+            {
+                throw new ArgumentNullException(nameof(tag));
+            }
+
             string tagLowerCase = tag.ToLowerInvariant();
             HTMLElementNode node;
 
             // Do not add this node if this property is false
             if (!AddNextNode)
+            {
                 return this;
+            }
 
             // Check doc type
             if (Settings.EnforceDocType && !((int)DocumentType == (int)HTMLDocumentType.Undefined))
@@ -812,10 +881,14 @@ namespace Twinvision.Flow
                 if (HTMLTags.Support.ContainsKey(tagLowerCase))
                 {
                     if (!HTMLTags.Support[tagLowerCase][(int)DocumentType])
-                        throw new Exception(string.Format("Tag <{0}> not supported for document type {1}", tag, DocumentType.ToString()));
+                    {
+                        throw new Exception($"Tag <{tag}> not supported for document type {DocumentType.ToString()}");
+                    }
                 }
                 else
-                    throw new Exception(string.Format("<{0}> is not a valid tag for document type {1}", tag, DocumentType.ToString()));
+                {
+                    throw new Exception($"<{tag}> is not a valid tag for document type {DocumentType.ToString()}");
+                }
             }
 
             // Check nesting if enabled
@@ -825,18 +898,27 @@ namespace Twinvision.Flow
                 {
                     string foundNestingItem;
                     if (asChild)
+                    {
                         node = lastNode;
+                    }
                     else
+                    {
                         node = lastNode.Parent;
-                    foundNestingItem = HTMLTags.Nesting[tagLowerCase].FirstOrDefault(where => where.StartsWith(node.Element.Tag().ToLower()));
+                    }
+
+                    foundNestingItem = HTMLTags.Nesting[tagLowerCase].FirstOrDefault(where => where.StartsWith(node.Element.Tag(), StringComparison.InvariantCultureIgnoreCase));
                     if (foundNestingItem != null)
                     {
                         var nestingItemCount = foundNestingItem.Split(':');
-                        if ((nestingItemCount[1] ?? "") == "1" && node.Descendants().Count(where => (where.Element.Tag().ToLower() ?? "") == (tagLowerCase ?? "")) > 0)
-                            throw new Exception(string.Format("Tag <{0}> cannot be nested multiple times inside tag <{1}>", tag, node.Element.Tag()));
+                        if ((nestingItemCount[1] ?? "") == "1" && node.Descendants().Any(where => (where.Element.Tag().ToLowerInvariant() ?? "") == (tagLowerCase ?? "")))
+                        {
+                            throw new Exception($"Tag <{tag}> cannot be nested multiple times inside tag <{node.Element.Tag()}>");
+                        }
                     }
                     else
-                        throw new Exception(string.Format("Tag <{0}> cannot be nested inside tag <{1}>", tag, node.Element.Tag()));
+                    {
+                        throw new Exception($"Tag <{tag}> cannot be nested inside tag <{node.Element.Tag()}>");
+                    }
                 }
             }
 
@@ -850,14 +932,23 @@ namespace Twinvision.Flow
             else if (asChild)
             {
                 if (index < 0)
+                {
                     lastNode = lastNode.AddChild(element);
+                }
                 else
+                {
                     lastNode = lastNode.InsertChild(index, element);
+                }
             }
             else if (index < 0)
+            {
                 lastNode = lastNode.Parent.AddChild(element);
+            }
             else
+            {
                 lastNode = lastNode.Parent.InsertChild(index, element);
+            }
+
             return this;
         }
 
@@ -876,6 +967,10 @@ namespace Twinvision.Flow
 
         public HTMLBuilder AddElementsFrom(HTMLBuilder builder)
         {
+            if(builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
             if (builder.tree != null)
             {
                 var storeLastNode = lastNode;
@@ -887,6 +982,10 @@ namespace Twinvision.Flow
 
         public HTMLBuilder AddElementsFrom(HTMLElementNode[] elements)
         {
+            if(elements == null)
+            {
+                throw new ArgumentNullException(nameof(elements));
+            }
             AddElementsFromElementEnumerable(elements);
             return this;
         }
@@ -896,9 +995,14 @@ namespace Twinvision.Flow
             HTMLElementNode node;
             node = DOM.DescendantsAndSelf().FirstOrDefault(where => where == element);
             if (node != null)
+            {
                 lastNode = node;
+            }
             else
+            {
                 throw new Exception("Element not found");
+            }
+
             return this;
         }
 
@@ -910,7 +1014,9 @@ namespace Twinvision.Flow
             if (node != null)
             {
                 if (node.Parent == node)
+                {
                     throw new Exception("Cannot remove root element");
+                }
                 else
                 {
                     lastNode = node.Parent;
@@ -918,14 +1024,20 @@ namespace Twinvision.Flow
                 }
             }
             else
+            {
                 throw new Exception("Element not found");
+            }
+
             return this;
         }
 
         public HTMLBuilder AddAttribute(string name)
         {
             if (!AddNextNode)
+            {
                 return this;
+            }
+
             lastNode.Element.Attributes.Add(new HTMLAttribute(name));
             return this;
         }
@@ -933,7 +1045,10 @@ namespace Twinvision.Flow
         public HTMLBuilder AddAttribute(string name, string value)
         {
             if (!AddNextNode)
+            {
                 return this;
+            }
+
             lastNode.Element.Attributes.Add(new HTMLAttribute(name, value));
             return this;
         }
@@ -947,21 +1062,32 @@ namespace Twinvision.Flow
         /// <remarks></remarks>
         public HTMLBuilder OnlyWhen(Func<bool> expression)
         {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
             AddNextNode = expression.Invoke();
             return this;
         }
-
-
 
         public HTMLBuilder Div(string className = "", string id = "", string content = "", HTMLAttribute[] additionalAttributes = null)
         {
             var attributes = new List<HTMLAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
+            {
                 attributes.Add(new HTMLAttribute("class", className));
+            }
+
             if (!string.IsNullOrWhiteSpace(id))
+            {
                 attributes.Add(new HTMLAttribute("id", id));
+            }
+
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
+            }
+
             return AddElement("div", attributes.ToArray(), content);
         }
 
@@ -970,9 +1096,15 @@ namespace Twinvision.Flow
             var attributes = new List<HTMLAttribute>();
 
             if (!string.IsNullOrWhiteSpace(className))
+            {
                 attributes.Add(new HTMLAttribute("class", className));
+            }
+
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
+            }
+
             AddElement("body", attributes.ToArray(), content);
             AddChildNode = true;
             return this;
@@ -982,11 +1114,20 @@ namespace Twinvision.Flow
         {
             var attributes = new List<HTMLAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
+            {
                 attributes.Add(new HTMLAttribute("class", className));
+            }
+
             if (!string.IsNullOrWhiteSpace(href))
+            {
                 attributes.Add(new HTMLAttribute("href", href));
+            }
+
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
+            }
+
             AddElement("a", attributes.ToArray(), content);
             return this;
         }
@@ -995,9 +1136,15 @@ namespace Twinvision.Flow
         {
             var attributes = new List<HTMLAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
+            {
                 attributes.Add(new HTMLAttribute("class", className));
+            }
+
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
+            }
+
             AddElement("p", attributes.ToArray(), content);
             return this;
         }
@@ -1006,7 +1153,10 @@ namespace Twinvision.Flow
         {
             var attributes = new List<HTMLAttribute>();
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
+            }
+
             AddElement("br", attributes.ToArray(), "");
             return this;
         }
@@ -1015,10 +1165,16 @@ namespace Twinvision.Flow
         {
             var attributes = new List<HTMLAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
+            {
                 attributes.Add(new HTMLAttribute("class", className));
+            }
+
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
-            AddElement("h" + level.ToString(), attributes.ToArray(), content);
+            }
+
+            AddElement($"h{level}", attributes.ToArray(), content);
             return this;
         }
 
@@ -1045,16 +1201,26 @@ namespace Twinvision.Flow
             {
                 InsertElement(0, "head", additionalAttributes, "");
                 if (!string.IsNullOrWhiteSpace(title))
+                {
                     AddElement(-1, "title", null, title, true, ContentPosition.BeforeElements);
+                }
+
                 if (!string.IsNullOrWhiteSpace(description))
+                {
                     AddElement(-1, "meta", new HTMLAttribute[] { new HTMLAttribute("name", "description"), new HTMLAttribute("content", description) }, "", false, ContentPosition.BeforeElements);
+                }
+
                 if (!string.IsNullOrWhiteSpace(keywords))
+                {
                     AddElement(-1, "meta", new HTMLAttribute[] { new HTMLAttribute("name", "keywords"), new HTMLAttribute("content", keywords) }, "", false, ContentPosition.BeforeElements);
+                }
             }
             finally
             {
                 if (keepNode != null)
+                {
                     lastNode = keepNode;
+                }
             }
             return this;
         }
@@ -1067,14 +1233,18 @@ namespace Twinvision.Flow
                 if (!string.IsNullOrWhiteSpace(name))
                 {
                     if (additionalAttributes == null)
-                        additionalAttributes = new HTMLAttribute[] { };
+                    {
+                        additionalAttributes = Array.Empty<HTMLAttribute>();
+                    }
                 }
                 AddElement("meta", new[] { new HTMLAttribute("name", name), new HTMLAttribute("content", content) }.Concat(additionalAttributes).ToArray(), "");
             }
             finally
             {
                 if (keepNode != null)
+                {
                     lastNode = keepNode;
+                }
             }
             return this;
         }
@@ -1087,14 +1257,19 @@ namespace Twinvision.Flow
                 if (!string.IsNullOrWhiteSpace(rel))
                 {
                     if (additionalAttributes == null)
-                        additionalAttributes = new HTMLAttribute[] { };
+                    {
+                        additionalAttributes = Array.Empty<HTMLAttribute>();
+                    }
+
                     AddElement("link", new[] { new HTMLAttribute("rel", rel), new HTMLAttribute("href", href) }.Concat(additionalAttributes).ToArray(), "");
                 }
             }
             finally
             {
                 if (keepNode != null)
+                {
                     lastNode = keepNode;
+                }
             }
             return this;
         }
@@ -1102,11 +1277,16 @@ namespace Twinvision.Flow
         public HTMLBuilder Document(string language = "")
         {
             if (!AddNextNode)
+            {
                 return this;
+            }
 
             var element = new HTMLDocument(DocumentType);
             if (!string.IsNullOrWhiteSpace(language))
+            {
                 element.Attributes.Add(new HTMLAttribute("lang", language));
+            }
+
             if (tree == null)
             {
                 tree = new HTMLElementNode(null, element);
@@ -1114,14 +1294,19 @@ namespace Twinvision.Flow
                 AddChildNode = true;
             }
             else
+            {
                 throw new Exception("The <html> tag must be the first element in an HTML document");
+            }
+
             return this;
         }
 
         public HTMLBuilder Comment(string content)
         {
             if (!AddNextNode)
+            {
                 return this;
+            }
 
             var element = new HTMLComment(content);
             if (tree == null)
@@ -1131,9 +1316,14 @@ namespace Twinvision.Flow
                 AddChildNode = true;
             }
             else if (AddChildNode)
+            {
                 lastNode = lastNode.AddChild(element);
+            }
             else
+            {
                 lastNode = lastNode.Parent.AddChild(element);
+            }
+
             return this;
         }
 
@@ -1141,9 +1331,15 @@ namespace Twinvision.Flow
         {
             var attributes = new List<HTMLAttribute>();
             if (!string.IsNullOrWhiteSpace(name))
+            {
                 attributes.Add(new HTMLAttribute("name", name));
+            }
+
             if (!string.IsNullOrWhiteSpace(action))
+            {
                 attributes.Add(new HTMLAttribute("action", action));
+            }
+
             switch (method)
             {
                 case FormMethod.Get:
@@ -1179,11 +1375,20 @@ namespace Twinvision.Flow
                     }
             }
             if (!autoComplete)
+            {
                 attributes.Add(new HTMLAttribute("autocomplete", "off"));
+            }
+
             if (novalidate)
+            {
                 attributes.Add(new HTMLAttribute("novalidate"));
+            }
+
             if (additionalAttributes != null)
+            {
                 attributes.AddRange(additionalAttributes);
+            }
+
             AddElement("form", attributes.ToArray());
             return this;
         }
@@ -1191,7 +1396,9 @@ namespace Twinvision.Flow
         public HTMLBuilder Empty()
         {
             if (!AddNextNode)
+            {
                 return this;
+            }
 
             var element = new HTMLEmpty();
             if (tree == null)
@@ -1201,9 +1408,14 @@ namespace Twinvision.Flow
                 AddChildNode = true;
             }
             else if (AddChildNode)
+            {
                 lastNode = lastNode.AddChild(element);
+            }
             else
+            {
                 lastNode = lastNode.Parent.AddChild(element);
+            }
+
             return this;
         }
 
@@ -1212,13 +1424,21 @@ namespace Twinvision.Flow
         public HTMLBuilder BeginComponent(string componentName)
         {
             if (componentStack == null)
+            {
                 componentStack = new Stack<Tuple<string, HTMLElementNode>>();
+            }
+
             if (tree == null)
+            {
                 Empty();
+            }
 
             if (string.IsNullOrWhiteSpace(componentName))
+            {
                 componentName = "Component";
-            Comment(string.Format("Begin {0}", componentName));
+            }
+
+            Comment($"Begin {componentName}");
             componentStack.Push(new Tuple<string, HTMLElementNode>(componentName, lastNode));
             return this;
         }
@@ -1236,11 +1456,13 @@ namespace Twinvision.Flow
                 string componentName = component.Item1;
                 lastNode = component.Item2;
                 AddChildNode = false;
-                Comment(string.Format("End {0}", componentName));
+                Comment($"End {componentName}");
                 return this;
             }
             else
+            {
                 throw new Exception("There is no component started with BeginComponent left to end");
+            }
         }
 
 
@@ -1269,6 +1491,10 @@ namespace Twinvision.Flow
 
         public void Write(StringBuilder sb)
         {
+            if (sb == null)
+            {
+                throw new ArgumentNullException(nameof(sb));
+            }
             WriteTree(sb, tree);
         }
 

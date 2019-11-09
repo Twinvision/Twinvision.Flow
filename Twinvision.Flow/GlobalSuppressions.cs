@@ -1,0 +1,15 @@
+﻿// This file is used by Code Analysis to maintain SuppressMessage
+// attributes that are applied to this project.
+// Project-level suppressions either have no target or are given
+// a specific target and scoped to a namespace, type, member, etc.
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.AddElement(System.Int32,System.String,System.Collections.Generic.IEnumerable{Twinvision.Flow.HTMLAttribute},System.String,System.Boolean,Twinvision.Flow.ContentPosition)~Twinvision.Flow.HTMLBuilder")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.WriteTree(System.Text.StringBuilder,Twinvision.Flow.HTMLElementNode,System.Int32)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLElement.ToString(System.Boolean)~System.String")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.Child~Twinvision.Flow.HTMLBuilder")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.DeleteElement(Twinvision.Flow.HTMLElementNode)~Twinvision.Flow.HTMLBuilder")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.Document(System.String)~Twinvision.Flow.HTMLBuilder")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.EndComponent~Twinvision.Flow.HTMLBuilder")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:Twinvision.Flow.HTMLBuilder.SetActiveElement(Twinvision.Flow.HTMLElementNode)~Twinvision.Flow.HTMLBuilder")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~P:Twinvision.Flow.HTMLBuilder.DOM")]

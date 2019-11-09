@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
-using Microsoft.VisualBasic;
+﻿using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 
 namespace Twinvision.Flow.Tests
 {
@@ -62,7 +62,10 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
 
             for (int i = 1; i <= 25; i++)
+            {
                 builder.Child().Div(className: "class" + i.ToString(), id: "element" + i.ToString());
+            }
+
             Assert.AreEqual(Test.Resources.AssertEqualDeeplyNested, builder.ToString());
         }
 
@@ -184,7 +187,10 @@ namespace Twinvision.Flow.Tests
             builder.Settings.EnforceProperNesting = false;
             builder.Document().Body().P().Child().AddElement("div");
             for (int i = 1; i <= 1000; i++)
+            {
                 builder.AddElement("p", "List element " + i.ToString()).Child();
+            }
+
             string s = builder.ToString();
         }
 
