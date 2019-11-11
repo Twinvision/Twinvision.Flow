@@ -1,4 +1,6 @@
-# Twinvision.Flow [![Build Status](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_apis/build/status/Twinvision.Twinvision.Flow?branchName=master)](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_build/latest?definitionId=10&branchName=master)
+[![Build Status](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_apis/build/status/Twinvision.Twinvision.Flow?branchName=master)](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_build/latest?definitionId=10&branchName=master)
+
+# Twinvision.Flow
 An HTML builder library to create html using a fluent C# builder pattern. 
 See below for some code examples.
 
