@@ -61,6 +61,16 @@ namespace Test {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;Test&quot;&gt;Content&lt;/div&gt;
+        ///.
+        /// </summary>
+        public static string AssertDoNotPreserveCase {
+            get {
+                return ResourceManager.GetString("AssertDoNotPreserveCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;div class=&quot;class1&quot; id=&quot;element1&quot;&gt;
         ///    &lt;div class=&quot;class2&quot; id=&quot;element2&quot;&gt;
         ///        &lt;div class=&quot;class3&quot; id=&quot;element3&quot;&gt;

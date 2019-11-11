@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AssertDoNotPreserveCase" xml:space="preserve">
+    <value>&lt;div class="Test"&gt;Content&lt;/div&gt;
+</value>
+  </data>
   <data name="AssertEqualDeeplyNested" xml:space="preserve">
     <value>&lt;div class="class1" id="element1"&gt;
     &lt;div class="class2" id="element2"&gt;

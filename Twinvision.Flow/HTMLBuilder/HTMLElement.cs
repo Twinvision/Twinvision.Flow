@@ -65,18 +65,18 @@ namespace Twinvision.Flow
 
         public HTMLElement(string tag)
         {
-            Tag(tag);
+            Tag(tag, false);
         }
 
         public HTMLElement(string tag, string content)
         {
-            Tag(tag);
+            Tag(tag, false);
             Content = content;
         }
 
         public HTMLElement(string tag, IEnumerable<HTMLAttribute> attributes)
         {
-            Tag(tag);
+            Tag(tag, false);
             if (attributes != null)
             {
                 Attributes.AddRange(attributes);
@@ -85,7 +85,7 @@ namespace Twinvision.Flow
 
         public HTMLElement(string tag, IEnumerable<HTMLAttribute> attributes, string content)
         {
-            Tag(tag);
+            Tag(tag, false);
             Content = content;
             if (attributes != null)
             {
@@ -95,7 +95,7 @@ namespace Twinvision.Flow
 
         public HTMLElement(string tag, string content, IEnumerable<HTMLAttribute> attributes)
         {
-            Tag(tag);
+            Tag(tag, false);
             Content = content;
             if (attributes != null)
             {
@@ -105,7 +105,7 @@ namespace Twinvision.Flow
 
         public HTMLElement(string tag, string content, IEnumerable<HTMLAttribute> attributes, ContentPosition contentPosition)
         {
-            Tag(tag);
+            Tag(tag, false);
             Content = content;
             if (attributes != null)
             {

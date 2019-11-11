@@ -56,6 +56,16 @@ namespace Twinvision.Flow.Tests
         }
 
         [TestMethod()]
+        [TestCategory("Settings")]
+        public void DoNotPreserveCase()
+        {
+            var builder = new HTMLBuilder();
+            builder.AddElement("DiV", new[] { new HTMLAttribute("CLASS", "Test") }, "Content");
+            Assert.AreEqual(Test.Resources.AssertDoNotPreserveCase, builder.ToString());
+        }
+
+
+        [TestMethod()]
         [TestCategory("Basics")]
         public void DeeplyNested()
         {
