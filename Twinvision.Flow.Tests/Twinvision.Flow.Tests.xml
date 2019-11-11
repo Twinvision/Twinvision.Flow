@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Twinvision.Flow.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Twinvision.Flow.Tests.My.Resources.Resources">
+            <summary>
+            A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.ResourceManager">
+            <summary>
+            Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.Culture">
+            <summary>
+            Overrides the current thread's CurrentUICulture property for all
+            resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertEqualDeeplyNested">
+            <summary>
+            Looks up a localized string similar to &lt;div class=&quot;class1&quot; id=&quot;element1&quot;&gt;
+            &lt;div class=&quot;class2&quot; id=&quot;element2&quot;&gt;
+            &lt;div class=&quot;class3&quot; id=&quot;element3&quot;&gt;
+            &lt;div class=&quot;class4&quot; id=&quot;element4&quot;&gt;
+            &lt;div class=&quot;class5&quot; id=&quot;element5&quot;&gt;
+            &lt;div class=&quot;class6&quot; id=&quot;element6&quot;&gt;
+            &lt;div class=&quot;class7&quot; id=&quot;element7&quot;&gt;
+            &lt;div class=&quot;class8&quot; id=&quot;element8&quot;&gt;
+            &lt;div class=&quot;class9&quot; id=&quot;element9&quot;&gt;
+            &lt;div cla [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertEqualHelloWorld">
+            <summary>
+            Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;body&gt;Hello world!&lt;/body&gt;
+            &lt;/html&gt;
+            .
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertEqualMultiLineComment">
+            <summary>
+            Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+            &lt;html lang=&quot;en&quot;&gt;
+            &lt;body&gt;
+            &lt;!--
+            A comment for
+            a div element
+            --&gt;
+            &lt;div&gt;HTML comments test&lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            .
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertEqualPreserveCase">
+            <summary>
+            Looks up a localized string similar to &lt;DiV CLASS=&quot;Test&quot;&gt;Content&lt;/DiV&gt;
+            .
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertEqualSingleLineComment">
+            <summary>
+            Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+            &lt;html lang=&quot;en&quot;&gt;
+            &lt;body&gt;
+            &lt;!-- A comment for a div element --&gt;
+            &lt;div&gt;HTML comments test&lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            .
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertEqualTabSize8">
+            <summary>
+            Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;body&gt;Size 8&lt;/body&gt;
+            &lt;/html&gt;
+            .
+            </summary>
+        </member>
+        <member name="P:Twinvision.Flow.Tests.My.Resources.Resources.AssertSkipComments">
+            <summary>
+            Looks up a localized string similar to &lt;div class=&quot;component&quot;&gt;
+            &lt;a href=&quot;http://www.google.com&quot; /&gt;
+            &lt;/div&gt;
+            .
+            </summary>
+        </member>
+    </members>
+</doc>
