@@ -61,6 +61,26 @@ namespace Test {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///    &lt;body&gt;
+        ///        &lt;h1&gt;Component example&lt;/h1&gt;
+        ///        &lt;!-- Begin My Component --&gt;
+        ///        &lt;div class=&quot;Main component element&quot;&gt;
+        ///            &lt;span&gt;Extra component content&lt;/span&gt;
+        ///        &lt;/div&gt;
+        ///        &lt;!-- End My Component --&gt;
+        ///    &lt;/body&gt;
+        ///&lt;/html&gt;
+        ///.
+        /// </summary>
+        public static string AssertCreateComponent {
+            get {
+                return ResourceManager.GetString("AssertCreateComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;div class=&quot;Test&quot;&gt;Content&lt;/div&gt;
         ///.
         /// </summary>
@@ -156,6 +176,25 @@ namespace Test {
         public static string AssertEqualTabSize8 {
             get {
                 return ResourceManager.GetString("AssertEqualTabSize8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;script src=&quot;test.js&quot;&gt;&lt;/script&gt;
+        ///.
+        /// </summary>
+        public static string AssertNoSelfClosing {
+            get {
+                return ResourceManager.GetString("AssertNoSelfClosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;script src=&quot;test.js&quot; /&gt;.
+        /// </summary>
+        public static string AssertSelfClosing {
+            get {
+                return ResourceManager.GetString("AssertSelfClosing", resourceCulture);
             }
         }
         

@@ -35,7 +35,6 @@ namespace Twinvision.Flow.My
 
 namespace Twinvision.Flow.My
 {
-    [HideModuleName()]
     [DebuggerNonUserCode()]
     [System.Runtime.CompilerServices.CompilerGenerated()]
     internal static class MySettingsProperty

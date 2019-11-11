@@ -93,7 +93,7 @@ namespace Twinvision.Flow.Tests
         public void MultiLineComment()
         {
             var builder = new HTMLBuilder();
-            builder.Document("en").Body().Comment("A comment for" + Constants.vbCrLf + "a div element").Div(content: "HTML comments test");
+            builder.Document("en").Body().Comment("A comment for" + Environment.NewLine + "a div element").Div(content: "HTML comments test");
             Assert.AreEqual(Test.Resources.AssertEqualMultiLineComment, builder.ToString());
         }
 
@@ -199,20 +199,46 @@ namespace Twinvision.Flow.Tests
             for (int i = 1; i <= 1000; i++)
             {
                 builder.AddElement("p", "List element " + i.ToString()).Child();
-            }
+            }            
+            Assert.AreEqual(builder.ToString().Split('\n').Length, 3007);
+        }
 
-            string s = builder.ToString();
+        [TestMethod()]
+        [TestCategory("Standards")]
+        public void NoSelfClosing()
+        {
+            var builder = new HTMLBuilder();
+            builder.Settings.EnforceProperNesting = false;
+            builder.Empty();
+            builder.AddElement("script", new[] { new HTMLAttribute("src", "test.js") }, "");
+            Assert.AreEqual(Test.Resources.AssertNoSelfClosing, builder.ToString());
         }
 
         [TestMethod()]
         [TestCategory("Standards")]
         public void SelfClosing()
         {
-            var builder = new HTMLBuilder();
-            builder.Settings.EnforceProperNesting = false;
+            var builder = new HTMLBuilder(HTMLDocumentType.HTML5);
+            builder.Settings.EnforceProperNesting = true;
             builder.Empty();
             builder.AddElement("script", new[] { new HTMLAttribute("src", "test.js") }, "");
-            string s = builder.ToString();
+            Assert.AreEqual(Test.Resources.AssertSelfClosing, builder.ToString());
+        }
+
+        [TestMethod()]
+        [TestCategory("Basics")]
+        public void CreateAComponent()
+        {           
+            var builder = new HTMLBuilder();
+            builder.Document().Body()
+                   .H(1, "Component example")
+                   .BeginComponent("My Component")
+                        .Div("Main component element")
+                            .Child()
+                                .AddElement("span", "Extra component content")
+                            .Parent()
+                   .EndComponent();
+            Assert.AreEqual(Test.Resources.AssertCreateComponent, builder.ToString());
         }
     }
 }

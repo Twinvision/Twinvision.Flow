@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Twinvision.Flow
 {
@@ -29,7 +28,7 @@ namespace Twinvision.Flow
 
         public List<HTMLElementNode> Children { get; }
 
-        public HTMLElementNode this[long index] => Children[Conversions.ToInteger(index)];
+        public HTMLElementNode this[int index] => Children[index];
 
         protected internal HTMLElementNode AddChild(IHTMLElement nodeData)
         {
