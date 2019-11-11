@@ -15,7 +15,7 @@ System.Diagnostics.Debug.WriteLine(builder.ToString());
     <body>Hello world!</body>
 </html>
 ```
-## Create div with multi line comments
+## Create div with comments
 ### Code
 ```csharp
 var builder = new HTMLBuilder();
@@ -37,7 +37,7 @@ System.Diagnostics.Debug.WriteLine(builder.ToString());
     </body>
 </html>
 ```
-## Create component blocks with optional comments
+## Create component block
 ### Code
 ```csharp
 var builder = new HTMLBuilder();
