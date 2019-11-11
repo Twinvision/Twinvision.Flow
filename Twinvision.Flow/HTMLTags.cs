@@ -4,7 +4,7 @@ namespace Twinvision.Flow
 {
     internal static class HTMLTags
     {
-        public static SortedDictionary<string, bool[]> Support = new SortedDictionary<string, bool[]>()
+        internal static SortedDictionary<string, bool[]> Support = new SortedDictionary<string, bool[]>()
         {
             {
                 "a",
@@ -489,7 +489,7 @@ namespace Twinvision.Flow
         };
 
         // Check for nesting. Also checks if an element is allowed just once or multiple times; tag:1 or tag:*
-        public static SortedDictionary<string, string[]> Nesting = new SortedDictionary<string, string[]>()
+        internal static SortedDictionary<string, string[]> Nesting = new SortedDictionary<string, string[]>()
         {
             {
                 "li",

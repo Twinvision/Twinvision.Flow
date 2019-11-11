@@ -81,16 +81,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HTMLBuilder\FlowJsonSerializer.cs" />
+    <Compile Include="HTMLBuilder\HTMLAttribute.cs" />
+    <Compile Include="HTMLBuilder\HTMLBuilderSettings.cs" />
+    <Compile Include="HTMLBuilder\HTMLComment.cs" />
+    <Compile Include="HTMLBuilder\HTMLDocument.cs" />
+    <Compile Include="HTMLBuilder\HTMLElement.cs" />
+    <Compile Include="HTMLBuilder\HTMLElementNode.cs" />
+    <Compile Include="HTMLBuilder\HTMLEmpty.cs" />
+    <Compile Include="HTMLBuilder\IHTMLElement.cs" />
     <Compile Include="HTMLParser.cs" />
-    <Compile Include="My Project\MyNamespace.Static.Designer.cs" />
-    <Compile Include="HTMLBuilder.cs" />
+    <Compile Include="HTMLBuilder\HTMLBuilder.cs" />
     <Compile Include="HTMLTags.cs" />
-    <Compile Include="LinqToTree.cs" />
+    <Compile Include="LinqToTreeEnumerableExtensions.cs" />
     <Compile Include="My Project\AssemblyInfo.cs" />
-    <Compile Include="My Project\Application.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,10 +115,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.cs</LastGenOutput>
-    </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
