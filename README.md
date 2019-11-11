@@ -37,4 +37,31 @@ System.Diagnostics.Debug.WriteLine(builder.ToString());
     </body>
 </html>
 ```
-## Create component blocks with optional comments 
+## Create component blocks with optional comments
+### Code
+```csharp
+var builder = new HTMLBuilder();
+builder.Document().Body()
+       .H(1, "Component example")
+       .BeginComponent("My Component")
+            .Div("Main component element")
+                .Child()
+                    .AddElement("span", "Extra component content")
+                .Parent()
+       .EndComponent();
+System.Diagnostics.Debug.WriteLine(builder.ToString());
+```
+### Result
+```html
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Component example</h1>
+        <!-- Begin My Component -->
+        <div class="Main component element">
+            <span>Extra component content</span>
+        </div>
+        <!-- End My Component -->
+    </body>
+</html>
+```
