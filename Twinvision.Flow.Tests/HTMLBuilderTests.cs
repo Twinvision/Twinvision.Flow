@@ -5,9 +5,15 @@ using System.Diagnostics;
 
 namespace Twinvision.Flow.Tests
 {
+  
     [TestClass()]
     public class HTMLBuilderTests
     {
+        private string ConvertResourceStringToCurrentEnvironment(string source)
+        {
+            return source.Replace("\r\n", Environment.NewLine);
+        }
+
         [TestMethod()]
         [TestCategory("Basics")]
         public void Empty()
@@ -23,7 +29,7 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
             builder.Document().Body(content: "Size 8");
             builder.Settings.TabSize = 8;
-            Assert.AreEqual(Test.Resources.AssertEqualTabSize8, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertEqualTabSize8), builder.ToString());
         }
 
         [TestMethod()]
@@ -33,7 +39,7 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
             builder.Settings.WriteComments = false;
             builder.BeginComponent().Div("component").Child().A("http://www.google.com").EndComponent();
-            Assert.AreEqual(Test.Resources.AssertSkipComments, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertSkipComments), builder.ToString());
         }
 
         [TestMethod()]
@@ -42,7 +48,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.Document().Body(content: "Hello world!");
-            Assert.AreEqual(Test.Resources.AssertEqualHelloWorld, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertEqualHelloWorld), builder.ToString());
         }
 
         [TestMethod()]
@@ -52,7 +58,7 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder();
             builder.AddElement("DiV", new[] { new HTMLAttribute("CLASS", "Test") }, "Content");
             builder.Settings.EnforceProperCase = false;
-            Assert.AreEqual(Test.Resources.AssertEqualPreserveCase, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertEqualPreserveCase), builder.ToString());
         }
 
         [TestMethod()]
@@ -61,7 +67,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.AddElement("DiV", new[] { new HTMLAttribute("CLASS", "Test") }, "Content");
-            Assert.AreEqual(Test.Resources.AssertDoNotPreserveCase, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertDoNotPreserveCase), builder.ToString());
         }
 
 
@@ -76,7 +82,7 @@ namespace Twinvision.Flow.Tests
                 builder.Child().Div(className: "class" + i.ToString(), id: "element" + i.ToString());
             }
 
-            Assert.AreEqual(Test.Resources.AssertEqualDeeplyNested, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertEqualDeeplyNested), builder.ToString());
         }
 
         [TestMethod()]
@@ -85,7 +91,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.Document("en").Body().Comment("A comment for a div element").Div(content: "HTML comments test");
-            Assert.AreEqual(Test.Resources.AssertEqualSingleLineComment, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertEqualSingleLineComment), builder.ToString());
         }
 
         [TestMethod()]
@@ -94,7 +100,7 @@ namespace Twinvision.Flow.Tests
         {
             var builder = new HTMLBuilder();
             builder.Document("en").Body().Comment("A comment for" + Environment.NewLine + "a div element").Div(content: "HTML comments test");
-            Assert.AreEqual(Test.Resources.AssertEqualMultiLineComment, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertEqualMultiLineComment), builder.ToString());
         }
 
         [TestMethod()]
@@ -211,7 +217,7 @@ namespace Twinvision.Flow.Tests
             builder.Settings.EnforceProperNesting = false;
             builder.Empty();
             builder.AddElement("script", new[] { new HTMLAttribute("src", "test.js") }, "");
-            Assert.AreEqual(Test.Resources.AssertNoSelfClosing, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertNoSelfClosing), builder.ToString());
         }
 
         [TestMethod()]
@@ -221,8 +227,8 @@ namespace Twinvision.Flow.Tests
             var builder = new HTMLBuilder(HTMLDocumentType.HTML5);
             builder.Settings.EnforceProperNesting = true;
             builder.Empty();
-            builder.AddElement("script", new[] { new HTMLAttribute("src", "test.js") }, "");
-            Assert.AreEqual(Test.Resources.AssertSelfClosing, builder.ToString());
+            builder.AddElement("br", "");
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertSelfClosing), builder.ToString());
         }
 
         [TestMethod()]
@@ -238,7 +244,7 @@ namespace Twinvision.Flow.Tests
                                 .AddElement("span", "Extra component content")
                             .Parent()
                    .EndComponent();
-            Assert.AreEqual(Test.Resources.AssertCreateComponent, builder.ToString());
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertCreateComponent), builder.ToString());
         }
     }
 }

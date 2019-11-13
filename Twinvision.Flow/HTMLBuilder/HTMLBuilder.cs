@@ -59,8 +59,7 @@ namespace Twinvision.Flow
         private bool _addNextNode = true;
 
         public HTMLBuilderSettings Settings { get; set; } = new HTMLBuilderSettings();
-        public static HTMLBuilderSettings DefaultSettings { get; set; } = new HTMLBuilderSettings();
-
+  
         public HTMLDocumentType DocumentType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations", Justification = "Changing this property to a function would break existing code")]
@@ -79,7 +78,7 @@ namespace Twinvision.Flow
 
         public HTMLBuilder()
         {
-            Settings = DefaultSettings;
+            Settings = new HTMLBuilderSettings();
             DocumentType = HTMLDocumentType.HTML5;
         }
 

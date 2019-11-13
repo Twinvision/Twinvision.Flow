@@ -233,7 +233,8 @@
 </value>
   </data>
   <data name="AssertSelfClosing" xml:space="preserve">
-    <value>&lt;script src="test.js" /&gt;</value>
+    <value>&lt;br/&gt;
+</value>
   </data>
   <data name="AssertSkipComments" xml:space="preserve">
     <value>&lt;div class="component"&gt;
