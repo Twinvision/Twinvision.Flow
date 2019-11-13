@@ -1,7 +1,5 @@
-[![Build Status](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_apis/build/status/Twinvision.Twinvision.Flow?branchName=master)]
-
-# Twinvision.Flow
-An HTML builder library to create html using a fluent C# builder pattern. 
+# Twinvision.Flow [![Build Status](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_apis/build/status/Twinvision.Twinvision.Flow?branchName=master)](https://dev.azure.com/TwinvisionSoftware/Twinvision.Flow/_build/latest?definitionId=10&branchName=master)
+An HTML builder library to create html using a fluent C# builder pattern.
 See below for some code examples.
 
 ### Hello world example
@@ -23,7 +21,7 @@ System.Diagnostics.Debug.WriteLine(builder.ToString());
 ```csharp
 var builder = new HTMLBuilder();
 builder.Document("en").Body()
-       .Comment("A comment for" + Constants.vbCrLf + "a div element")
+       .Comment("A comment for" + Environment.NewLine + "a div element")
        .Div(content: "HTML comments test");
 System.Diagnostics.Debug.WriteLine(builder.ToString());
 ```
