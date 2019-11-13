@@ -21,7 +21,7 @@ System.Diagnostics.Debug.WriteLine(builder.ToString());
 ```csharp
 var builder = new HTMLBuilder();
 builder.Document("en").Body()
-       .Comment("A comment for" + Constants.vbCrLf + "a div element")
+       .Comment("A comment for" + Environment.NewLine + "a div element")
        .Div(content: "HTML comments test");
 System.Diagnostics.Debug.WriteLine(builder.ToString());
 ```
