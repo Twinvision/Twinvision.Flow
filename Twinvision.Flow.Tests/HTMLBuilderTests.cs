@@ -239,12 +239,30 @@ namespace Twinvision.Flow.Tests
             builder.Document().Body()
                    .H(1, "Component example")
                    .BeginComponent("My Component")
-                        .Div("Main component element")
+                        .Div("component")
                             .Child()
                                 .AddElement("span", "Extra component content")
                             .Parent()
                    .EndComponent();
             Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertCreateComponent), builder.ToString());
+        }
+
+        [TestMethod]
+        [TestCategory("Basics")]
+        public void CreateTableFromList()
+        {
+            var builder = new HTMLBuilder();
+            builder.Table(TestRecordData.ListRecords, "Test", "Test data", new HTMLAttribute[] { new HTMLAttribute("style", "width:100%") });
+            Debug.WriteLine(builder.ToString());
+        }
+
+        [TestMethod]
+        [TestCategory("Basics")]
+        public void CreateTableFromDataTable()
+        {
+            var builder = new HTMLBuilder();
+            builder.Table(TestRecordData.TableRecords(), "Test", "Test data", new HTMLAttribute[] { new HTMLAttribute("style", "width:100%") });
+            Debug.WriteLine(builder.ToString());
         }
     }
 }
