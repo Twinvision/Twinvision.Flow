@@ -194,6 +194,14 @@ namespace Twinvision.Flow
             return this;
         }
 
+        public HTMLBuilder Child(Action action)
+        {
+            Child();
+            action.Invoke();
+            Parent();
+            return this;
+        }
+
         private bool AddChildNode
         {
             get
@@ -969,6 +977,19 @@ namespace Twinvision.Flow
             {
                 throw new Exception("There is no component started with BeginComponent left to end");
             }
+        }
+
+        public HTMLBuilder Component(string name, Action action)
+        {
+            BeginComponent(name);
+            action.Invoke();
+            EndComponent();
+            return this;
+        }
+
+        public HTMLBuilder Component(Action action)
+        {
+            return Component("", action);
         }
 
         public override string ToString()

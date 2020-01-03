@@ -11,8 +11,8 @@ namespace Twinvision.Flow.Tests
         [TestMethod]
         public void TestParser()
         {
-            var parser = new HTMLBuilder();
-            var s = parser.Parse(Resources.AssertCreateComponent).ToString();
+            var builder = new HTMLBuilder();
+            var s = builder.Parse(Resources.AssertCreateComponent).ToString();
 
         }
     }
