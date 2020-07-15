@@ -123,7 +123,7 @@
     &lt;body&gt;
         &lt;h1&gt;Component example&lt;/h1&gt;
         &lt;!-- Begin My Component --&gt;
-        &lt;div class="Main component element"&gt;
+        &lt;div class="component"&gt;
             &lt;span&gt;Extra component content&lt;/span&gt;
         &lt;/div&gt;
         &lt;!-- End My Component --&gt;

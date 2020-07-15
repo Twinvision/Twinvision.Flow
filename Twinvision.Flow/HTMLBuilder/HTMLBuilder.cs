@@ -233,6 +233,14 @@ namespace Twinvision.Flow
             return this;
         }
 
+        public HTMLBuilder Child(Action action)
+        {
+            Child();
+            action.Invoke();
+            Parent();
+            return this;
+        }
+
         private bool AddChildNode
         {
             get
@@ -839,13 +847,11 @@ namespace Twinvision.Flow
                         attributes.Add(new HTMLAttribute("enctype", "application/x-www-form-urlencoded"));
                         break;
                     }
-
                 case FormEncodingType.FormData:
                     {
                         attributes.Add(new HTMLAttribute("enctype", "multipart/form-data"));
                         break;
                     }
-
                 case FormEncodingType.Plain:
                     {
                         attributes.Add(new HTMLAttribute("enctype", "text/plain	"));
@@ -868,6 +874,82 @@ namespace Twinvision.Flow
             }
 
             AddElement("form", attributes.ToArray());
+            return this;
+        }
+
+        public HTMLBuilder Table<T>(IEnumerable<T> data, string name, string caption, HTMLAttribute[] attributes = null)
+        {
+            var addAttributes = new List<HTMLAttribute>();
+            var type = typeof(T);
+            var properties = type.GetProperties();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                addAttributes.Add(new HTMLAttribute("name", name));
+            }
+            if (attributes != null)
+            {
+                addAttributes.AddRange(attributes);
+            }
+            AddElement("table", addAttributes).Child();
+            if (!string.IsNullOrWhiteSpace(caption))
+            {
+                AddElement("caption", caption);
+            }
+            AddElement("tr").Child();
+            // Table headers
+            foreach (var p in properties)
+            {
+                AddElement("th", p.Name);
+            }
+            Parent();
+            // Table rows
+            foreach (T row in data)
+            {
+                AddElement("tr").Child();
+                foreach (var p in properties)
+                {
+                    AddElement("td", p.GetValue(row).ToString());
+                }
+                Parent();
+            }
+            Parent().Parent();
+            return this;
+        }
+
+        public HTMLBuilder Table(System.Data.DataTable data, string name, string caption, HTMLAttribute[] attributes = null)
+        {
+            var addAttributes = new List<HTMLAttribute>();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                addAttributes.Add(new HTMLAttribute("name", name));
+            }
+            if (attributes != null)
+            {
+                addAttributes.AddRange(attributes);
+            }
+            AddElement("table", addAttributes).Child();
+            if (!string.IsNullOrWhiteSpace(caption))
+            {
+                AddElement("caption", caption);
+            }
+            AddElement("tr").Child();
+            // Table headers
+            foreach (System.Data.DataColumn column in data.Columns)
+            {
+                AddElement("th", column.ColumnName);
+            }
+            Parent();
+            // Table rows
+            foreach (System.Data.DataRow row in data.Rows)
+            {
+                AddElement("tr").Child();
+                foreach (System.Data.DataColumn column in data.Columns)
+                {
+                    AddElement("td", row[column.ColumnName].ToString());
+                }
+                Parent();
+            }
+            Parent().Parent();
             return this;
         }
 
@@ -941,6 +1023,19 @@ namespace Twinvision.Flow
             {
                 throw new Exception("There is no component started with BeginComponent left to end");
             }
+        }
+
+        public HTMLBuilder Component(string name, Action action)
+        {
+            BeginComponent(name);
+            action.Invoke();
+            EndComponent();
+            return this;
+        }
+
+        public HTMLBuilder Component(Action action)
+        {
+            return Component("", action);
         }
 
         public override string ToString()

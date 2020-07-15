@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Twinvision.Flow.Tests
 {
-  
+
     [TestClass()]
     public class HTMLBuilderTests
     {
@@ -205,7 +205,7 @@ namespace Twinvision.Flow.Tests
             for (int i = 1; i <= 1000; i++)
             {
                 builder.AddElement("p", "List element " + i.ToString()).Child();
-            }            
+            }
             Assert.AreEqual(builder.ToString().Split('\n').Length, 3007);
         }
 
@@ -244,17 +244,54 @@ namespace Twinvision.Flow.Tests
         [TestMethod()]
         [TestCategory("Basics")]
         public void CreateAComponent()
-        {           
+        {
             var builder = new HTMLBuilder();
+
             builder.Document().Body()
                    .H(1, "Component example")
                    .BeginComponent("My Component")
-                        .Div("Main component element")
+                        .Div("component")
                             .Child()
                                 .AddElement("span", "Extra component content")
                             .Parent()
                    .EndComponent();
             Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertCreateComponent), builder.ToString());
+        }
+
+        [TestMethod]
+        [TestCategory("Basics")]
+        public void CreateTableFromList()
+        {
+            var builder = new HTMLBuilder();
+            builder.Table(TestRecordData.ListRecords, "Test", "Test data", new HTMLAttribute[] { new HTMLAttribute("style", "width:100%") });
+            Debug.WriteLine(builder.ToString());
+        }
+
+        [TestMethod]
+        [TestCategory("Basics")]
+        public void CreateTableFromDataTable()
+        {
+            var builder = new HTMLBuilder();
+            builder.Table(TestRecordData.TableRecords(), "Test", "Test data", new HTMLAttribute[] { new HTMLAttribute("style", "width:100%") });
+            Debug.WriteLine(builder.ToString());
+        }
+
+        [TestMethod]
+        [TestCategory("Basics")]
+        public void AddChildrenInLambda()
+        {
+            var builder = new HTMLBuilder();
+            builder.AddElement("div", new HTMLAttribute[] { new HTMLAttribute("class", "parent") });
+            builder.Child(() =>
+            {
+                builder.AddElement("div", "Child Level 1");
+                builder.AddAttribute("class", "child");
+                builder.Child(() =>
+                {
+                    builder.H(2, "Child Level 2");
+                });
+            });
+            Debug.WriteLine(builder.ToString());
         }
     }
 }
