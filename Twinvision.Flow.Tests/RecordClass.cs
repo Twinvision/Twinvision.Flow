@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Twinvision.Flow.Tests
 {
@@ -27,7 +24,7 @@ namespace Twinvision.Flow.Tests
             System.Data.DataRow row = table.NewRow();
             row["Name"] = "John Smith";
             row["EmailAddress"] = "smith@company.com";
-            row["BirthDate"] = new DateTime(1990,1,15);
+            row["BirthDate"] = new DateTime(1990, 1, 15);
             row["Active"] = true;
             table.Rows.Add(row);
             return table;

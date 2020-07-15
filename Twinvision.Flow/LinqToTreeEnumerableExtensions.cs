@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace Twinvision.Flow
@@ -142,7 +141,7 @@ namespace Twinvision.Flow
         /// </summary>
         public static IEnumerable<HTMLElementNode> Elements(this HTMLElementNode adapter)
         {
-            if(adapter == null)
+            if (adapter == null)
             {
                 throw new ArgumentNullException(nameof(adapter));
             }
