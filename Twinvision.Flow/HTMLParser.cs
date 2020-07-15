@@ -170,6 +170,7 @@ namespace Twinvision.Flow
                                     if (PeekUpperInvariant(html, position + 1, 7) == "DOCTYPE")
                                     {
                                         pm = ParseMode.DocumentHeader;
+                                        position = +7;
                                         element = new HTMLDocument(HTMLDocumentType.HTML5);
                                     }
                                     else if (Peek(html, position, 2) == "--")
@@ -193,6 +194,61 @@ namespace Twinvision.Flow
                                     {
                                         ps = ParseState.ElementWhiteSpaceInTagName;
                                         ct = ParseCharacterType.WhiteSpace;
+                                    }
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (ps)
+                            {
+                                case ParseState.ElementClosedWithNoTagName:
+                                    pm = ParseMode.WhiteSpace;
+                                    break;
+                                case ParseState.ElementInvalidCharaterInTagName:
+                                    pm = ParseMode.WhiteSpace;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case ParseMode.DocumentHeader:
+                        if (ps == ParseState.Valid)
+                        {
+                            switch (c)
+                            {
+                                case '>':
+                                    ct = ParseCharacterType.ElementClosed;
+                                    pm = ParseMode.WhiteSpace;
+                                    if (element.Tag() == "")
+                                    {
+                                        ps = ParseState.ElementClosedWithNoTagName;
+                                    }
+                                    break;
+                                case 'h':
+                                    if (PeekUpperInvariant(html, position, 4) == "html")
+                                    {
+                                        pm = ParseMode.DocumentHeader;
+                                        position = 7;
+                                        element = new HTMLDocument(HTMLDocumentType.HTML5);
+                                    }
+                                    else if (Peek(html, position, 2) == "--")
+                                    {
+                                        pm = ParseMode.Comment;
+                                        element = new HTMLComment("");
+                                    }
+                                    break;
+                                case '"':
+                                case '\'':
+                                case '/':
+                                case '\\':
+                                    ps = ParseState.ElementInvalidCharaterInTagName;
+                                    break;
+                                default:
+                                    if (!Char.IsWhiteSpace(c))
+                                    {
+                                        ps = ParseState.Valid;
                                     }
                                     break;
                             }
