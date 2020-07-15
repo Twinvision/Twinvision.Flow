@@ -1,11 +1,8 @@
 ﻿namespace Twinvision.Flow
 {
     /// <summary>
-
     /// This class represents the html element. It will automatically prefix it with an (html 5) doctype element
-
     /// </summary>
-
     /// <remarks>This element can only be added to the root. Otherwise an exception will be thrown.</remarks>
     public class HTMLDocument : HTMLElement
     {
