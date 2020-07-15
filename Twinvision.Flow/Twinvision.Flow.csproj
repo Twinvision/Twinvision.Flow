@@ -83,7 +83,6 @@
     <Compile Include="HTMLBuilder\HTMLElementNode.cs" />
     <Compile Include="HTMLBuilder\HTMLEmpty.cs" />
     <Compile Include="HTMLBuilder\IHTMLElement.cs" />
-    <Compile Include="HTMLParser.cs" />
     <Compile Include="HTMLBuilder\HTMLBuilder.cs" />
     <Compile Include="HTMLTags.cs" />
     <Compile Include="LinqToTreeEnumerableExtensions.cs" />

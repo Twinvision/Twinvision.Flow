@@ -99,6 +99,45 @@ namespace Twinvision.Flow
             Settings = settings;
         }
 
+        public HTMLBuilder(IHTMLElement rootElement)
+        {
+            Settings = new HTMLBuilderSettings();
+            DocumentType = HTMLDocumentType.HTML5;
+            if(rootElement != null)
+            {
+                AddElement(rootElement);
+            }
+        }
+
+        public HTMLBuilder(HTMLBuilderSettings settings, IHTMLElement rootElement)
+        {
+            Settings = settings;
+            DocumentType = HTMLDocumentType.HTML5;
+            if (rootElement != null)
+            {
+                AddElement(rootElement);
+            }
+        }
+
+        public HTMLBuilder(HTMLDocumentType documentType, IHTMLElement rootElement)
+        {
+            DocumentType = documentType;
+            if (rootElement != null)
+            {
+                AddElement(rootElement);
+            }
+        }
+
+        public HTMLBuilder(HTMLDocumentType documentType, HTMLBuilderSettings settings, IHTMLElement rootElement)
+        {
+            DocumentType = documentType;
+            Settings = settings;
+            if (rootElement != null)
+            {
+                AddElement(rootElement);
+            }
+        }
+
         private void WriteTree(StringBuilder sb, HTMLElementNode root, int nestedLevel = 0)
         {
             if (root != null)
