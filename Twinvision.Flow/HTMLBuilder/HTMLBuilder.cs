@@ -59,7 +59,7 @@ namespace Twinvision.Flow
         private bool _addNextNode = true;
 
         public HTMLBuilderSettings Settings { get; set; } = new HTMLBuilderSettings();
-  
+
         public HTMLDocumentType DocumentType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations", Justification = "Changing this property to a function would break existing code")]
@@ -103,7 +103,7 @@ namespace Twinvision.Flow
         {
             Settings = new HTMLBuilderSettings();
             DocumentType = HTMLDocumentType.HTML5;
-            if(rootElement != null)
+            if (rootElement != null)
             {
                 AddElement(rootElement);
             }
@@ -273,7 +273,14 @@ namespace Twinvision.Flow
             {
                 throw new ArgumentNullException(nameof(element));
             }
-            return AddElement(-1, element.Tag(), element.Attributes.ToArray(), element.Content, AddChildNode, ContentPosition.BeforeElements);
+            if (element as HTMLEmpty != null)
+            {
+                return Empty();
+            }
+            else
+            {
+                return AddElement(-1, element.Tag(), element.Attributes, element.Content, AddChildNode, ContentPosition.BeforeElements);
+            }
         }
 
         public HTMLBuilder AddElement(string tag)
@@ -438,7 +445,7 @@ namespace Twinvision.Flow
 
         public HTMLBuilder AddElementsFrom(HTMLBuilder builder)
         {
-            if(builder == null)
+            if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
@@ -453,7 +460,7 @@ namespace Twinvision.Flow
 
         public HTMLBuilder AddElementsFrom(HTMLElementNode[] elements)
         {
-            if(elements == null)
+            if (elements == null)
             {
                 throw new ArgumentNullException(nameof(elements));
             }

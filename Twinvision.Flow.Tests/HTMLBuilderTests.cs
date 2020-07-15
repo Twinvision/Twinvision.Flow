@@ -232,6 +232,16 @@ namespace Twinvision.Flow.Tests
         }
 
         [TestMethod()]
+        [TestCategory("Standards")]
+        public void CustomRootElement()
+        {
+            var builder = new HTMLBuilder(HTMLDocumentType.HTML5, new HTMLEmpty());
+            builder.Settings.EnforceProperNesting = true;
+            builder.AddElement("br", "");
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertSelfClosing), builder.ToString());
+        }
+
+        [TestMethod()]
         [TestCategory("Basics")]
         public void CreateAComponent()
         {           
