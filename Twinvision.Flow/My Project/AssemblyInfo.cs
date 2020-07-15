@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Twinvision.Flow")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("HTMLBuilder used to generate HTML from code.")]
 [assembly: AssemblyCompany("Twinvision Software BV")]
 [assembly: AssemblyProduct("Twinvision.Flow")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
