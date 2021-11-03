@@ -1,23 +1,23 @@
 ﻿namespace Twinvision.Flow
 {
     /// <summary>
-    /// This class represents an HTML attribute.
+    /// This class represents an JSX attribute.
     /// These are the key value pairs you can find inside an opening tag of an HTML element
     /// </summary>
     /// <remarks></remarks>
-    public class HTMLAttribute
+    public class JSXAttribute : IAttribute
     {
         public string Name { get; set; }
 
         public string Value { get; set; }
 
-        public HTMLAttribute(string name, string value)
+        public JSXAttribute(string name, string value)
         {
             Name = name;
             Value = value;
         }
 
-        public HTMLAttribute(string name)
+        public JSXAttribute(string name)
         {
             Name = name;
             Value = null;
@@ -31,7 +31,7 @@
             }
             else
             {
-                return Name + "=\"" + Value + "\"";
+                return Name + "={" + Value + "}";
             }
         }
 
@@ -46,7 +46,7 @@
                 }
                 else
                 {
-                    return Name.ToLowerInvariant() + "=\"" + Value + "\"";
+                    return Name.ToLowerInvariant() + "={" + Value + "}";
                 }
             }
             else

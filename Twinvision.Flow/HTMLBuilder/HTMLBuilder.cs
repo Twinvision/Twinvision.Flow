@@ -263,17 +263,17 @@ namespace Twinvision.Flow
             return AddElement(tag, null, content);
         }
 
-        public HTMLBuilder AddElement(string tag, IEnumerable<HTMLAttribute> attributes, string content, ContentPosition contentPosition)
+        public HTMLBuilder AddElement(string tag, IEnumerable<IAttribute> attributes, string content, ContentPosition contentPosition)
         {
             return AddElement(-1, tag, attributes, content, AddChildNode, contentPosition);
         }
 
-        public HTMLBuilder AddElement(string tag, IEnumerable<HTMLAttribute> attributes)
+        public HTMLBuilder AddElement(string tag, IEnumerable<IAttribute> attributes)
         {
             return AddElement(-1, tag, attributes, "", AddChildNode, ContentPosition.BeforeElements);
         }
 
-        public HTMLBuilder AddElement(string tag, IEnumerable<HTMLAttribute> attributes, string content)
+        public HTMLBuilder AddElement(string tag, IEnumerable<IAttribute> attributes, string content)
         {
             return AddElement(-1, tag, attributes, content, AddChildNode, ContentPosition.BeforeElements);
         }
@@ -297,17 +297,17 @@ namespace Twinvision.Flow
             return AddElement(index, tag, null, content, AddChildNode, ContentPosition.BeforeElements);
         }
 
-        public HTMLBuilder InsertElement(int index, string tag, IEnumerable<HTMLAttribute> attributes, string content)
+        public HTMLBuilder InsertElement(int index, string tag, IEnumerable<IAttribute> attributes, string content)
         {
             return AddElement(index, tag, attributes, content, AddChildNode, ContentPosition.BeforeElements);
         }
 
-        public HTMLBuilder InsertElement(int index, string tag, IEnumerable<HTMLAttribute> attributes, string content, ContentPosition contentPosition)
+        public HTMLBuilder InsertElement(int index, string tag, IEnumerable<IAttribute> attributes, string content, ContentPosition contentPosition)
         {
             return AddElement(index, tag, attributes, content, AddChildNode, contentPosition);
         }
 
-        private HTMLBuilder AddElement(int index, string tag, IEnumerable<HTMLAttribute> attributes, string content, bool asChild, ContentPosition contentPosition)
+        private HTMLBuilder AddElement(int index, string tag, IEnumerable<IAttribute> attributes, string content, bool asChild, ContentPosition contentPosition)
         {
             if (string.IsNullOrWhiteSpace(tag))
             {
@@ -518,9 +518,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Div(string className = "", string id = "", string content = "", HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Div(string className = "", string id = "", string content = "", IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
             {
                 attributes.Add(new HTMLAttribute("class", className));
@@ -539,9 +539,9 @@ namespace Twinvision.Flow
             return AddElement("div", attributes.ToArray(), content);
         }
 
-        public HTMLBuilder Body(string className = "", string content = "", HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Body(string className = "", string content = "", IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
 
             if (!string.IsNullOrWhiteSpace(className))
             {
@@ -558,9 +558,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder A(string href = "", string content = "", string className = "", HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder A(string href = "", string content = "", string className = "", IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
             {
                 attributes.Add(new HTMLAttribute("class", className));
@@ -580,9 +580,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder P(string content = "", string className = "", HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder P(string content = "", string className = "", IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
             {
                 attributes.Add(new HTMLAttribute("class", className));
@@ -597,9 +597,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder BR(HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder BR(IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
             if (additionalAttributes != null)
             {
                 attributes.AddRange(additionalAttributes);
@@ -609,9 +609,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder H(int level, string content = "", string className = "", HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder H(int level, string content = "", string className = "", IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
             if (!string.IsNullOrWhiteSpace(className))
             {
                 attributes.Add(new HTMLAttribute("class", className));
@@ -626,22 +626,22 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Header(HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Header(IAttribute[] additionalAttributes = null)
         {
             return Header("", "", "", additionalAttributes);
         }
 
-        public HTMLBuilder Header(string title, HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Header(string title, IAttribute[] additionalAttributes = null)
         {
             return Header(title, "", "", additionalAttributes);
         }
 
-        public HTMLBuilder Header(string title, string description, HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Header(string title, string description, IAttribute[] additionalAttributes = null)
         {
             return Header(title, description, "", additionalAttributes);
         }
 
-        public HTMLBuilder Header(string title, string description, string keywords, HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Header(string title, string description, string keywords, IAttribute[] additionalAttributes = null)
         {
             var keepNode = lastNode;
 
@@ -673,7 +673,7 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Meta(string name, string content, HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Meta(string name, string content, IAttribute[] additionalAttributes = null)
         {
             var keepNode = lastNode;
             try
@@ -682,7 +682,7 @@ namespace Twinvision.Flow
                 {
                     if (additionalAttributes == null)
                     {
-                        additionalAttributes = Array.Empty<HTMLAttribute>();
+                        additionalAttributes = Array.Empty<IAttribute>();
                     }
                 }
                 AddElement("meta", new[] { new HTMLAttribute("name", name), new HTMLAttribute("content", content) }.Concat(additionalAttributes).ToArray(), "");
@@ -697,7 +697,7 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Link(string rel, string href, HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Link(string rel, string href, IAttribute[] additionalAttributes = null)
         {
             var keepNode = lastNode;
             try
@@ -706,7 +706,7 @@ namespace Twinvision.Flow
                 {
                     if (additionalAttributes == null)
                     {
-                        additionalAttributes = Array.Empty<HTMLAttribute>();
+                        additionalAttributes = Array.Empty<IAttribute>();
                     }
 
                     AddElement("link", new[] { new HTMLAttribute("rel", rel), new HTMLAttribute("href", href) }.Concat(additionalAttributes).ToArray(), "");
@@ -775,9 +775,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Form(string name, string action, FormMethod method = FormMethod.Post, FormEncodingType encodingType = FormEncodingType.UrlEncoded, bool autoComplete = true, bool novalidate = false, HTMLAttribute[] additionalAttributes = null)
+        public HTMLBuilder Form(string name, string action, FormMethod method = FormMethod.Post, FormEncodingType encodingType = FormEncodingType.UrlEncoded, bool autoComplete = true, bool novalidate = false, IAttribute[] additionalAttributes = null)
         {
-            var attributes = new List<HTMLAttribute>();
+            var attributes = new List<IAttribute>();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 attributes.Add(new HTMLAttribute("name", name));
@@ -839,9 +839,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Table<T>(IEnumerable<T> data, string name, string caption, HTMLAttribute[] attributes = null)
+        public HTMLBuilder Table<T>(IEnumerable<T> data, string name, string caption, IAttribute[] attributes = null)
         {
-            var addAttributes = new List<HTMLAttribute>();
+            var addAttributes = new List<IAttribute>();
             var type = typeof(T);
             var properties = type.GetProperties();
             if (!string.IsNullOrWhiteSpace(name))
@@ -878,9 +878,9 @@ namespace Twinvision.Flow
             return this;
         }
 
-        public HTMLBuilder Table(System.Data.DataTable data, string name, string caption, HTMLAttribute[] attributes = null)
+        public HTMLBuilder Table(System.Data.DataTable data, string name, string caption, IAttribute[] attributes = null)
         {
-            var addAttributes = new List<HTMLAttribute>();
+            var addAttributes = new List<IAttribute>();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 addAttributes.Add(new HTMLAttribute("name", name));

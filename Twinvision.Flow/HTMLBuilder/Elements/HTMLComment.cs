@@ -63,7 +63,7 @@ namespace Twinvision.Flow
             }
         }
 
-        public List<HTMLAttribute> Attributes { get; }
+        public List<IAttribute> Attributes { get; }
 
         public string Empty(bool enforceProperCase = true)
         {

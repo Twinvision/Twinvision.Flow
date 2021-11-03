@@ -60,7 +60,7 @@ namespace Twinvision.Flow
             }
         }
 
-        public List<HTMLAttribute> Attributes { get; } = new List<HTMLAttribute>();
+        public List<IAttribute> Attributes { get; } = new List<IAttribute>();
 
         public HTMLElement(string tag)
         {
@@ -73,7 +73,7 @@ namespace Twinvision.Flow
             Content = content;
         }
 
-        public HTMLElement(string tag, IEnumerable<HTMLAttribute> attributes)
+        public HTMLElement(string tag, IEnumerable<IAttribute> attributes)
         {
             Tag(tag, false);
             if (attributes != null)
@@ -82,17 +82,7 @@ namespace Twinvision.Flow
             }
         }
 
-        public HTMLElement(string tag, IEnumerable<HTMLAttribute> attributes, string content)
-        {
-            Tag(tag, false);
-            Content = content;
-            if (attributes != null)
-            {
-                Attributes.AddRange(attributes);
-            }
-        }
-
-        public HTMLElement(string tag, string content, IEnumerable<HTMLAttribute> attributes)
+        public HTMLElement(string tag, IEnumerable<IAttribute> attributes, string content)
         {
             Tag(tag, false);
             Content = content;
@@ -102,7 +92,17 @@ namespace Twinvision.Flow
             }
         }
 
-        public HTMLElement(string tag, string content, IEnumerable<HTMLAttribute> attributes, ContentPosition contentPosition)
+        public HTMLElement(string tag, string content, IEnumerable<IAttribute> attributes)
+        {
+            Tag(tag, false);
+            Content = content;
+            if (attributes != null)
+            {
+                Attributes.AddRange(attributes);
+            }
+        }
+
+        public HTMLElement(string tag, string content, IEnumerable<IAttribute> attributes, ContentPosition contentPosition)
         {
             Tag(tag, false);
             Content = content;

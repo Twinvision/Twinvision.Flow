@@ -11,7 +11,7 @@ namespace Twinvision.Flow
         string Open(bool enforceProperCase = true);
         string Close(bool enforceProperCase = true);
         string Empty(bool enforceProperCase = true);
-        List<HTMLAttribute> Attributes { get; }
+        List<IAttribute> Attributes { get; }
         string Content { get; set; }
         bool IsMultiLine { get; }
         ContentPosition ContentPosition { get; set; }

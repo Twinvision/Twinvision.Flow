@@ -292,5 +292,17 @@ namespace Twinvision.Flow.Tests
             });
             Debug.WriteLine(builder.ToString());
         }
+
+        [TestMethod]
+        [TestCategory("Basics")]
+        public void AddHtmlAndJSXAttribute()
+        {
+            var builder = new HTMLBuilder();
+            builder.Settings.EnforceDocType = false;
+            builder.Settings.EnforceProperCase = false;
+            builder.AddElement("ReactElement",new IAttribute[] {new HTMLAttribute("class","react-element"), new JSXAttribute("onclick","runCode()") }, "{content}");
+            builder.AddElement("ReactElement", new HTMLAttribute[] { new HTMLAttribute("class", "react-element"), new HTMLAttribute("onclick", "runCode()") }, "{content}");
+            Debug.WriteLine(builder.ToString());
+        }
     }
 }
