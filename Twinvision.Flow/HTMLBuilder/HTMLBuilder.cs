@@ -6,44 +6,6 @@ using System.Text;
 namespace Twinvision.Flow
 {
 
-    public enum ContentPosition : int
-    {
-        BeforeElements = 0,
-        AfterAlements = 1
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Makes it more readable")]
-    public enum HTMLDocumentType : int
-    {
-        XHTML_1_1 = 0,
-        HTML4_01_Frameset = 1,
-        HTML4_01_Strict = 2,
-        HTML4_01_Transitional = 3,
-        HTML5 = 4,
-        Undefined = 255
-    }
-
-    public enum FormMethod : int
-    {
-        Get = 1,
-        Post = 2
-    }
-
-    public enum FormEncodingType : int
-    {
-        UrlEncoded = 1,
-        FormData = 2,
-        Plain = 3
-    }
-
-    public enum Target : int
-    {
-        Blank = 1,
-        Self = 2,
-        Parent = 3,
-        Top = 4
-    }
-
     /// <summary>
     /// This class alows you to add elements using many helper functions (i.e. Document Body, Header and Div)
     /// and create some hopefully well-formed HTML output

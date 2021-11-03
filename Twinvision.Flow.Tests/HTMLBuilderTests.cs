@@ -280,7 +280,7 @@ namespace Twinvision.Flow.Tests
         public void AddChildrenInLambda()
         {
             var builder = new HTMLBuilder();
-            builder.AddElement("div", new HTMLAttribute[] { new HTMLAttribute("class", "parent") });
+            builder.Div("parent");
             builder.Child(() =>
             {
                 builder.AddElement("div", "Child Level 1");
