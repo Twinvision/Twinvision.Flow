@@ -517,7 +517,26 @@ namespace Twinvision.Flow
             AddNextNode = expression.Invoke();
             return this;
         }
+        public HTMLBuilder Img(string className = "", string content = "", string src = "", string alt = "") 
+        {
+            var attributes = new List<IAttribute>();
+            if (!string.IsNullOrWhiteSpace(className))
+            {
+                attributes.Add(new HTMLAttribute("class", className));
+            }
 
+            if (!string.IsNullOrWhiteSpace(src))
+            {
+                attributes.Add(new HTMLAttribute("src", src));
+            }
+
+            if (!string.IsNullOrWhiteSpace(alt))
+            {
+                attributes.Add(new HTMLAttribute("alt", alt));
+            }
+
+            return AddElement("img", attributes.ToArray(), content);
+        }
         public HTMLBuilder Div(string className = "", string id = "", string content = "", IAttribute[] additionalAttributes = null)
         {
             var attributes = new List<IAttribute>();

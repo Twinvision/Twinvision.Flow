@@ -228,6 +228,10 @@
 &lt;/html&gt;
 </value>
   </data>
+  <data name="AssertImage" xml:space="preserve">
+    <value>&lt;img class="class" src="testImage.jpg" alt="Image Alt Text" /&gt;
+</value>
+  </data>
   <data name="AssertNoSelfClosing" xml:space="preserve">
     <value>&lt;script src="test.js"&gt;&lt;/script&gt;
 </value>
