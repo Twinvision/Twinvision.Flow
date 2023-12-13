@@ -304,5 +304,16 @@ namespace Twinvision.Flow.Tests
             builder.AddElement("ReactElement", new HTMLAttribute[] { new HTMLAttribute("class", "react-element"), new HTMLAttribute("onclick", "runCode()") }, "{content}");
             Debug.WriteLine(builder.ToString());
         }
+
+        [TestMethod()]
+        [TestCategory("Basics")]
+        public void CreateImage()
+        {
+            var builder = new HTMLBuilder();
+            builder.Img(className:"class", src: "testImage.jpg", alt: "Image Alt Text");
+            Assert.AreEqual(ConvertResourceStringToCurrentEnvironment(Test.Resources.AssertImage), builder.ToString());
+            Debug.WriteLine(builder.ToString());
+        }
+
     }
 }
